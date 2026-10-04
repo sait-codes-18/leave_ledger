@@ -10,7 +10,7 @@ export function cn(...inputs: (string | undefined | null | false)[]) {
   return twMerge(clsx(inputs));
 }
 
-export default function Sidebar() {
+export default function Sidebar({ onCloseMobile }: { onCloseMobile?: () => void }) {
   const { signOut, user } = useAuth();
   const navigate = useNavigate();
   const [profile, setProfile] = useState<any>(null);
@@ -55,6 +55,7 @@ export default function Sidebar() {
             <NavLink
               key={item.to}
               to={item.to}
+              onClick={onCloseMobile}
               className={({ isActive }) =>
                 cn(
                   'flex items-center gap-4 px-8 py-3 text-sm font-medium transition-all duration-200 relative',
@@ -79,6 +80,7 @@ export default function Sidebar() {
       <div className="p-4 border-t border-[var(--color-sidebar-active)] space-y-1">
         <NavLink
           to="/settings"
+          onClick={onCloseMobile}
           className={({ isActive }) =>
             cn(
               'flex items-center gap-4 px-4 py-2 rounded-sm text-sm font-medium transition-all duration-200',
