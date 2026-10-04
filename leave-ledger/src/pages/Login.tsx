@@ -48,6 +48,7 @@ export default function Login() {
           password,
         });
         if (error) throw error;
+        navigate('/dashboard', { replace: true });
       }
     } catch (err: any) {
       setError(err.message || 'An error occurred during authentication.');
