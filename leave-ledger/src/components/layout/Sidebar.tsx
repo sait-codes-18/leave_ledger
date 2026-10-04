@@ -33,7 +33,7 @@ export default function Sidebar({ onCloseMobile }: { onCloseMobile?: () => void 
   ];
 
   return (
-    <aside className="bg-[var(--color-sidebar)] text-[var(--color-sidebar-text)] flex flex-col fixed left-0 top-0 w-64 h-screen z-40">
+    <aside className="bg-[var(--color-sidebar)] text-[var(--color-sidebar-text)] flex flex-col w-64 h-full">
       
       <div className="p-6 border-b border-[var(--color-sidebar-active)] flex items-center gap-4">
         <div className="w-10 h-10 rounded-full border border-[var(--color-sidebar-accent)] flex items-center justify-center text-[var(--color-sidebar-accent)]">

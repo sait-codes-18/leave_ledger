@@ -29,6 +29,7 @@ export default function AppLayout() {
       <div className={`
         fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out md:translate-x-0
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        pt-14 md:pt-0 bg-[var(--color-sidebar)] shadow-2xl md:shadow-none
       `}>
         <Sidebar onCloseMobile={() => setSidebarOpen(false)} />
       </div>
