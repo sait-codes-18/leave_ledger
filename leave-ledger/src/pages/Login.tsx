@@ -1,13 +1,21 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { Mail, Lock, LogIn, UserPlus, FileText } from 'lucide-react';
+import { useAuth } from '../components/auth/AuthContext';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 export default function Login() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+
+  if (user) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   const handleAuth = async (action: 'login' | 'signup', e: React.FormEvent) => {
     e.preventDefault();
