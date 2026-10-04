@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../components/auth/AuthContext';
-import { ChevronLeft, ChevronRight, X, ExternalLink, FileText, Calendar as CalendarIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, ExternalLink, FileText } from 'lucide-react';
 import { format, addMonths, subMonths, startOfMonth, endOfMonth, eachDayOfInterval, startOfWeek, endOfWeek, isSameMonth, isSameDay, isToday, parseISO } from 'date-fns';
 import { useNavigate } from 'react-router-dom';
 import CertificateViewer from '../components/events/CertificateViewer';
