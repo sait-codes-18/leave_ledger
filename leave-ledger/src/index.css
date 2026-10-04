@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Georgia', 'Times New Roman', serif;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Editorial Light Theme Colors */
+  --color-bg: #F5F1E7; /* Warm cream paper */
+  --color-surface: #FCFBF9; /* Lighter cream for cards */
+  --color-border: #D8D0C5; /* Tan border */
+  --color-border-dark: #C4B9A9;
+  
+  --color-text-primary: #1C2733; /* Deep navy ink */
+  --color-text-secondary: #71695F; /* Muted brown */
+  --color-text-accent: #9A3E47; /* Maroon / Terracotta */
+  
+  --color-primary: #1C2733; 
+  --color-primary-hover: #0F1722;
+
+  --color-sidebar: #18222D;
+  --color-sidebar-text: #A8B2BD;
+  --color-sidebar-active: #212C3A;
+  --color-sidebar-accent: #D4B98C; /* Gold */
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+  }
+}
+
+@layer utilities {
+  .editorial-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 2px; /* Very sharp corners */
+    box-shadow: none;
+  }
+
+  .editorial-subhead {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-accent);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 0px;
+  }
+}
