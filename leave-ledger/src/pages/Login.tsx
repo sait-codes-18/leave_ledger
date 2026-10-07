@@ -75,10 +75,11 @@ export default function Login() {
         navigate('/dashboard', { replace: true });
       }
     } catch (err: any) {
-      if (err.message === 'Invalid login credentials') {
-        setError('Invalid credentials. If you are a new user, please click Sign Up first.');
+      const errorMsg = err.message || '';
+      if (errorMsg.toLowerCase().includes('invalid login credentials')) {
+        setError('Account not found or incorrect password. If you are a new user, please click Sign Up first!');
       } else {
-        setError(err.message || 'An error occurred during authentication.');
+        setError(errorMsg || 'An error occurred during authentication.');
       }
     } finally {
       setLoading(false);
