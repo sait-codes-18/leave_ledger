@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../components/auth/AuthContext';
-import { Search, Calendar, MapPin, Award, Trash2, Edit2, ChevronRight, FileBadge } from 'lucide-react';
+import { Search, Calendar, MapPin, Award, Trash2, Edit2, ChevronRight, FileBadge, FileText } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import EventForm from '../components/events/EventForm';
 import CertificateViewer from '../components/events/CertificateViewer';
 import { format, parseISO } from 'date-fns';
@@ -9,6 +10,7 @@ import type { EventRecord } from '../types';
 
 export default function Events() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [events, setEvents] = useState<EventRecord[]>([]);
   const [loading, setLoading] = useState(true);
   
@@ -165,6 +167,13 @@ export default function Events() {
                   </button>
                 </div>
                 
+                <button 
+                  onClick={() => navigate(`/applications/new?eventId=${event.id}`)}
+                  className="bg-[var(--color-primary)] border border-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] transition-colors py-2 px-4 flex items-center justify-between text-xs font-semibold tracking-widest uppercase text-white rounded-sm gap-2"
+                >
+                  Generate App <FileText className="w-4 h-4" />
+                </button>
+
                 {event.hasCertificate ? (
                   <button 
                     onClick={() => setViewingCertEvent(event)}
