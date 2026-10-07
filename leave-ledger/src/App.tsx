@@ -8,6 +8,7 @@ import Applications from './pages/Applications';
 import ApplicationGenerator from './pages/ApplicationGenerator';
 import Settings from './pages/Settings';
 import Login from './pages/Login';
+import UpdatePassword from './pages/UpdatePassword';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
@@ -29,6 +30,7 @@ function App() {
             <Route path="applications" element={<Applications />} />
             <Route path="applications/new" element={<ApplicationGenerator />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="update-password" element={<UpdatePassword />} />
           </Route>
         </Routes>
       </Router>
