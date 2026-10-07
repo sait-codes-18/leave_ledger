@@ -17,6 +17,30 @@ export default function Login() {
     return <Navigate to="/dashboard" replace />;
   }
 
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) {
+      setError("Please enter your email address to reset password.");
+      return;
+    }
+    
+    setLoading(true);
+    setError(null);
+    setMessage(null);
+    
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/login`,
+      });
+      if (error) throw error;
+      setMessage("Password reset instructions sent to your email.");
+    } catch (err: any) {
+      setError(err.message || "Failed to send reset instructions.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleAuth = async (action: 'login' | 'signup', e: React.FormEvent) => {
     e.preventDefault();
     
@@ -51,7 +75,11 @@ export default function Login() {
         navigate('/dashboard', { replace: true });
       }
     } catch (err: any) {
-      setError(err.message || 'An error occurred during authentication.');
+      if (err.message === 'Invalid login credentials') {
+        setError('Invalid credentials. If you are a new user, please click Sign Up first.');
+      } else {
+        setError(err.message || 'An error occurred during authentication.');
+      }
     } finally {
       setLoading(false);
     }
@@ -86,7 +114,17 @@ export default function Login() {
           </div>
 
           <div>
-            <label className="block text-[0.65rem] font-semibold uppercase tracking-widest text-[var(--color-text-secondary)] mb-1.5">Password</label>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="block text-[0.65rem] font-semibold uppercase tracking-widest text-[var(--color-text-secondary)]">Password</label>
+              <button 
+                type="button" 
+                onClick={handleResetPassword}
+                disabled={loading}
+                className="text-[0.65rem] font-semibold tracking-widest text-[var(--color-text-accent)] hover:underline uppercase disabled:opacity-50"
+              >
+                Forgot Password?
+              </button>
+            </div>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-text-secondary)]" />
               <input

@@ -25,7 +25,7 @@ export default function Dashboard() {
     async function loadDashboard() {
       if (!user) return;
       try {
-        const { data: prof } = await supabase.from('profiles').select('name').eq('id', user.id).single();
+        const { data: prof } = await supabase.from('profiles').select('name, roll_no').eq('id', user.id).single();
         if (prof) setProfile(prof);
 
         const { data: events } = await supabase
@@ -99,10 +99,26 @@ export default function Dashboard() {
   }
 
   const firstName = profile?.name ? profile.name.split(' ')[0] : 'Student';
+  const isProfileIncomplete = profile && (!profile.name || !profile.roll_no);
 
   return (
     <div className="max-w-6xl mx-auto py-6">
       
+      {isProfileIncomplete && (
+        <div className="mb-8 bg-[#FDF8F8] border border-[var(--color-text-accent)] p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div>
+            <h3 className="text-lg font-serif text-[var(--color-text-primary)] mb-1">Complete Your Profile</h3>
+            <p className="text-xs text-[var(--color-text-secondary)]">Your name and roll number are required to generate official leave applications.</p>
+          </div>
+          <button 
+            onClick={() => navigate('/settings')}
+            className="shrink-0 bg-[var(--color-text-accent)] text-white px-5 py-2.5 text-xs font-semibold uppercase tracking-widest hover:bg-red-900 transition-colors"
+          >
+            Go to Settings
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="mb-10 flex justify-between items-start">
         <div>

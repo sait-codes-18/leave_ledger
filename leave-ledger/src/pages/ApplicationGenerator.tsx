@@ -83,9 +83,9 @@ export default function ApplicationGenerator() {
         event_id: event.id,
         addressee,
         template,
-        body_text: bodyText,
-        included_certificate: attachCert
+        body_text: bodyText
       });
+      navigate('/applications');
     }
   };
 
